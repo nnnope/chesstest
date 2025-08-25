@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Debug Puzzle f8c5</title>
+</head>
+<body>
+<h1>Testing puzzle KJetilHhy-fredengestad-m26</h1>
+<p>FEN: r1b1kb1r/pppp1qp1/8/4N1Bp/2B3n1/2N5/PP4PP/R2QR1K1 b kq - 0 13</p>
+<p>Best move: f8c5</p>
+<p>PV: f8c5 e1e3 f7f2 g1h1 c5e3 e5g4 h5g4 d1e1</p>
+
+<script src="vendor/chess.min.js"></script>
+<script>
+// Test the exact puzzle scenario
+const fen = "r1b1kb1r/pppp1qp1/8/4N1Bp/2B3n1/2N5/PP4PP/R2QR1K1 b kq - 0 13";
+const pv = "f8c5 e1e3 f7f2 g1h1 c5e3 e5g4 h5g4 d1e1";
+
+console.log("=== DEBUG PUZZLE TEST ===");
+console.log("FEN:", fen);
+console.log("PV:", pv);
+
+const game = new Chess(fen);
+console.log("Initial position valid:", game.fen());
+console.log("Legal moves:", game.moves({verbose: true}).map(m => `${m.from}${m.to}${m.promotion || ''}`));
+
+const moves = pv.split(' ');
+moves.forEach((moveUci, i) => {
+  console.log(`\n--- Move ${i+1}: ${moveUci} ---`);
+  console.log("Current FEN:", game.fen());
+  
+  const from = moveUci.slice(0, 2);
+  const to = moveUci.slice(2, 4);
+  const promotion = moveUci.length > 4 ? moveUci[4] : undefined;
+  
+  const move = game.move({ from, to, promotion });
+  if (move) {
+    console.log("✅ Move successful:", move.san);
+  } else {
+    console.log("❌ Move failed!");
+    console.log("Legal moves:", game.moves());
+    return;
+  }
+});
+
+console.log("=== TEST COMPLETE ===");
+</script>
+</body>
+</html>
