@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Blitz Tactics Miner — Viewer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Styles FIRST -->
+  <link rel="stylesheet" href="vendor/chessboard.min.css">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Chess Club Tournament Puzzles</h1>
+    <div class="quality-note">
+      <strong>🏆 Custom Mate Puzzles:</strong> From YOUR tournament games • Mate-in-2 to Mate-in-6 • Surprise your chess club!
+    </div>
+    <div class="controls">
+      <select id="dataset">
+        <option value="tournament_mates_FINAL.json" selected>🏆 FINAL: All Tournament Mates (190 puzzles) - Complete Collection</option>
+      </select>
+      <select id="difficulty">
+        <option value="all">All difficulties</option>
+        <option value="1">Easy</option>
+        <option value="2">Medium</option>
+        <option value="3">Hard</option>
+      </select>
+      <button id="prev">&#9664; Prev</button>
+      <span id="count">0 / 0</span>
+      <button id="next">Next &#9654;</button>
+      <button id="share">Copy Link</button>
+      <button id="show-solution">Show solution</button>
+      <button id="reset">Reset</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="board-panel">
+      <div id="board" style="width: 520px; height: 520px;"></div>
+      <div class="move-panel">
+        <div id="status"></div>
+        <div class="meta">
+          <div><strong>Players:</strong> <span id="players"></span></div>
+          <div><strong>Event/Date:</strong> <span id="event"></span></div>
+          <div><strong>Side to move:</strong> <span id="side"></span></div>
+          <div class="spoiler-section" style="display: none;">
+            <div><strong>Motifs:</strong> <span id="motifs"></span></div>
+            <div><strong>PV:</strong> <code id="pv"></code></div>
+          </div>
+          <div><strong>Eval Δ:</strong> <span id="delta"></span></div>
+          <button id="toggle-spoilers" class="spoiler-toggle">👁️ Show Hints</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="pv-controls">
+      <button id="pv-prev">◀ Step back</button>
+      <button id="pv-next">Step forward ▶</button>
+    </section>
+  </main>
+
+  <footer>
+    <small>Tip: try your move on the board; it will tell you if it matches the engine's best.</small>
+  </footer>
+
+  <!-- JS in the correct order: jQuery → chess.js → chessboard.js → app -->
+  <script src="vendor/jquery.min.js"></script>
+  <script src="vendor/chess.min.js"></script>
+  <script src="vendor/chessboard.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
